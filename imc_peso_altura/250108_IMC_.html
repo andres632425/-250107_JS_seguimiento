@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio Coger datos y mostrar-</title>
+    <meta name="description" content="" />
+    <!--
+      
+El ejercicio consiste en crear una funcionalidad web que recoja un valor del usuario, un nombre y posteriormente
+lo muestre en otra etiqueta (un div) por medio de un evento "lanzado" por un click en un boton
+
+
+Hay varias webs de muestra
+
+https://www.texasheart.org/heart-health/heart-information-center/topics/calculadora-del-indice-de-masa-corporal-imc/
+
+https://cirugiayobesidad.es/calcular-imc/
+
+
+ 
+Los datos a utilizar en la funcionalidad son 
+- La formula    El IMC (Indice de Masa Corporal es el peso expresado en kilos entre la altura al cuadrado (expresada en metros);
+- Los rangos
+   
+   Establecemos tres, aunque puede haber muchos mas y otras variables de evaluacion (genero, edad, actividad fisica,..)
+          Delgadez: imc menor que 18.5
+          Peso normal: imc mayor o igual que 18.5 y menor que 25.
+          Sobrepeso:  imc mayor o igual que 25
+
+
+
+ 
+      
+
+    -->
+
+    <style>
+      body {
+        color: aliceblue;
+        font-size: 20px;
+      }
+
+      .contenedor {
+        width: 30%;
+        height: 300px;
+        background-color: blueviolet;
+      }
+
+      .centrado {
+        margin: 0 auto;
+      }
+
+      #uno div {
+        height: 50px;
+        background-color: rgb(110, 163, 57);
+       
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="contenedor centrado">
+      <section id="uno">
+        <p></p>
+        <label>Nombre</label><input type="text"  value="" />
+        <p></p>
+        <label>Peso</label><input type="text"  value="" />
+        <p></p>
+        <label>Altura</label><input type="text" value="" />
+        <p></p>
+        <div id="mensaje"></div>
+        <!-- <button id="btn1">PASAR DATO</button> -->
+        <button >VALOR IMC</button>
+      </section>
+    </div>
+
+    
+    <script>
+ 
+   
+    </script>
+  </body>
+</html>
