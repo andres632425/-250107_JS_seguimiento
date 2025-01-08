@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parametros REST  Y Operador SPREAD (de propagacion)</title>
+<!--     
+
+-- Parametros REST 
+
+-- Operador SPREAD (de propagacion)
+
+-->
+    <style>
+      #uno {
+        display: flex;
+      }
+      #uno div {
+        display: flex;
+        flex-direction: column;
+      }
+      #uno div:first-child {
+        height: 20vh;
+      }
+      #uno div:nth-child(2) {
+        height: 80vh;
+      }
+
+      select {
+        width: 14rem;
+      }
+
+      img {  border: 0.3rem solid black;
+        border-radius: 1.15rem;}
+
+        #dos {margin-top: 3rem;}
+
+        #dos {
+        display: flex;
+        
+        
+      }
+      #muestra {width: 40%;}
+      #dos div {
+        display: flex;
+        flex-direction: column;
+        padding: 0.3rem;
+      }
+      #dos div:first-child {
+        height: 20vh;
+        width: 40% ;
+      }
+      #dos div:nth-child(2) {
+        height: 80vh;
+      }
+      #boton {width: 16rem;
+       
+    }
+      .verde {font-size: 1.5rem;
+               color: rgb(87, 213, 87)}
+      .azul {font-size: 0.8rem;
+               color: rgb(116, 147, 190)}
+
+
+        button {margin: 0.2rem;
+                font-size: 1.5rem;
+                width: 17rem;
+            }
+            #pedido  {font-size: 2.3rem;}
+    </style>
+  </head>
+  <body>
+  <div id="root"> 
+    <section id="uno">
+   
+    <img src="../imagenes/pizza.jpg" width="60%" />
+    <div>
+      <div>
+
+        <button id="pedido">Pedido Pizza</button>
+     
+      </div>
+     <div id="ingredientes">
+          <button>Espinacas</button>
+          <button>Pimiento Verde</button>
+          <button>Pimiento Rojo</button>
+          <button>Bacon</button>
+          <button>Anchoas</button>
+          <button>Mozarella</button>
+          <button>Champiñones</button>
+          <button>Pepinillos</button>
+          <button>Comino</button>
+
+     </div>
+      <div id="mensaje">Mensaje de salida</div>
+    </div>
+  </div>
+ </section>
+  <section id="dos">
+   <!-- <img src="imagenes/pizza.jpg" width="55%" /> --> 
+    <div id="muestra">  
+    <button id="boton">Unir Personajes</button>
+    <div id="mensaje2"></div>
+    <div id="mensaje3"></div>
+    </div>
+
+  </section>
+  
+    <script>
+
+      // 1- DEFINICION OBJETOS Y VARIABLES
+      const pedido = document.getElementById("pedido");
+      const mensaje = document.getElementById("mensaje");
+      const ingredientes=document.getElementById("ingredientes");
+
+
+      // 2- SELECCION DE INGREDIENTES
+
+      const elementos=[];
+      ingredientes.addEventListener("click", function(event){
+               // alert(event.target.nodeName);
+            if(event.target.nodeName=="BUTTON") {   
+
+             event.target.style.backgroundColor="lightgreen";
+                   
+           let item=event.target.innerHTML;
+          // alert(item);
+           
+           elementos.push(item);
+          // alert(elementos);     
+
+         }  
+      });
+ 
+      //3 - A - CREACION DE PEDIDO
+      pedido.addEventListener("click", function (e) {
+        e.target.style.border="0.3rem solid orange";
+       // alert(elementos);  
+
+     let resultado =pizza("masa gruesa", "base de queso",...elementos)//Operador de propagacion Spread que expande los elementos del array, cuando se pasan como argumentos
+     mensaje.innerHTML=resultado;
+
+      });
+     
+
+    //COMPOSICION DE PIZZA 3 - B
+  
+      function pizza(masa, base, ...ingredientes) {  // Parametros REST
+
+              return ` La pizza va a tener ${masa} y  ${base} con los ingredientes que tenemos a continuacion ${ingredientes}`;
+      
+      }  
+
+    </script>
+  </body>
+</html>
