@@ -92,8 +92,12 @@ Los datos a utilizar en la funcionalidad son
  
        var nombre =caja1.value;
         var peso = parseFloat(caja2.value);
-        var altura = parseFloat(caja3.value);
-
+        let altura=caja3.value
+           altura=altura.replace(",",".");// remplazamos la "," por un ".". Asi no da error
+           alert(altura)
+           altura = parseFloat(altura);
+           // El parseo de un decimal con ",", coje solo el numero entero
+           alert(altura)
         var imc = peso / (altura * altura);
 
         var imc2 = imc.toFixed(2);
