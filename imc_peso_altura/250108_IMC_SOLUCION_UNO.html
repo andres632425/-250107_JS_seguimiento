@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio Coger datos y mostrar-</title>
+    <meta name="description" content="" />
+    <!--
+      
+El ejercicio consiste en crear una funcionalidad web que recoja un valor del usuario, un nombre y posteriormente
+lo muestre en otra etiqueta (un div) por medio de un evento "lanzado" por un click en un boton
+
+
+Hay varias webs de muestra
+
+https://www.texasheart.org/heart-health/heart-information-center/topics/calculadora-del-indice-de-masa-corporal-imc/
+
+https://cirugiayobesidad.es/calcular-imc/
+
+
+ 
+Los datos a utilizar en la funcionalidad son 
+- La formula    El IMC (Indice de Masa Corporal es el peso expresado en kilos entre la altura al cuadrado (expresada en metros);
+- Los rangos
+   
+   Establecemos tres, aunque puede haber muchos mas y otras variables de evaluacion (genero, edad, actividad fisica,..)
+          Delgadez: imc menor que 18.5
+          Peso normal: imc mayor o igual que 18.5 y menor que 25.
+          Sobrepeso:  imc mayor o igual que 25
+
+
+
+ 
+      
+
+    -->
+
+    <style>
+      body {
+        color: aliceblue;
+        font-size: 20px;
+      }
+
+      .contenedor {
+        width: 30%;
+        height: 300px;
+        background-color: blueviolet;
+      }
+
+      .centrado {
+        margin: 0 auto;
+      }
+
+      #uno div {
+        height: 50px;
+        background-color: rgb(110, 163, 57);
+       
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="contenedor centrado">
+      <section id="uno">
+        <p></p>
+        <label>Nombre</label><input type="text" id="inpt1" value="Ignacio" />
+        <p></p>
+        <label>Peso</label><input type="text" id="inpt2" value="90" />
+        <p></p>
+        <label>Altura</label><input type="text" id="inpt3" value="1.80" />
+        <p></p>
+        <div id="mensaje"></div>
+        <!-- <button id="btn1">PASAR DATO</button> -->
+        <button id="btn2">VALOR IMC</button>
+      </section>
+    </div>
+
+    
+    <script>
+      const boton1 = document.getElementById("btn1");
+      const boton2 = document.getElementById("btn2");
+      const caja1 = document.getElementById("inpt1");
+      const caja2 = document.getElementById("inpt2");
+      const caja3 = document.getElementById("inpt3");
+
+      const mensaje = document.getElementById("mensaje");
+
+      boton2.addEventListener("click", calcular);
+    
+      function calcular() {
+ 
+       var nombre =caja1.value;
+        var peso = parseFloat(caja2.value);
+        var altura = parseFloat(caja3.value);
+
+        var imc = peso / (altura * altura);
+
+        var imc2 = imc.toFixed(2);
+       let resultado="";
+
+        if (imc2 < 18.5) {
+          //resultado = "Tu imc es " + imc2 + ". Tu peso es inferior al normal";
+          resultado = `Tu imc es ${imc2}. Tu peso es inferior al normal`;
+          mensaje.style.backgroundColor="lightblue";
+          mensaje.style.color="#000";
+        } else if (imc2 < 25) {
+          //resultado = "Tu imc es " + imc2 + ". Tu peso es normal";
+          resultado = `Tu imc es ${imc2}. Tu peso es normal`;
+          mensaje.style.backgroundColor="green"
+          mensaje.style.color="#fff";
+        } else {
+          //resultado = "Tu imc es " + imc2 + ". Tu peso es superior al normal";
+          resultado = `Tu imc es ${imc2}. Tu peso es superior al normal`;
+          mensaje.style.backgroundColor="orange"
+          mensaje.style.color="#000";
+        }
+
+        mensaje.innerHTML = resultado;
+
+  }
+    
+
+
+   
+    </script>
+  </body>
+</html>
