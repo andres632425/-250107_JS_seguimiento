@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reemplazar contenido en cadena y array/objeto</title>
+    <!--
+    Hay varios aspectos reseñables en este ejercicio
+
+    1 -  La funcion o metodo replace() puede ser una herramienta muy 
+    eficaz en combinacion con expresiones regulares
+
+    Ejemplo de JavaScript string.replace() con expresiones regulares
+    https://www.freecodecamp.org/espanol/news/ejemplo-de-javascript-string-replace-con-expresiones-regulares/
+    
+   
+    Creamos un objeto de expresion regular, que recoge como "mascara" o pattern
+    un string determinado
+
+    const expresion = new RegExp(textoRemplazable, "g"); 
+          frase = frase.replace(expresion, textoNuevo);
+    
+    2 - (166)
+    Para controlar la ejecucion de una funcion con un rasgo especifico podemos
+    utilizar un parametro con un valor por defecto que puede cambiar.
+    
+    3-  (180)
+    Un foreach, itera un array u objeto realizando una operacion por cada uno
+    de los items de esa lista o coleccion
+    
+    -->
+    <style>
+      article {
+        display: flex;
+      }
+      article div {
+        width: 50%;
+        border: 0.3rem solid grey;
+        padding: 0.3rem;
+      }
+
+      #miTexto {
+        resize: none;
+      }
+
+      #btn1 {
+        margin-top: 8.1rem;
+      }
+      #entrada {
+        width: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2>Texto Propuesto</h2>
+      <p id="uno">
+        Las Olimpiadas de Munich fueron en su momento las mas innovadoras.
+        Munich creo las mejores instalaciones deportivas de la epoca. En Munich
+        se reunieron deportistas de mas de 125 naciones
+      </p>
+      <div id="dos"></div>
+      <button onclick="olimpiadas()">CAMBIAR UNO</button>
+      <button onclick="masOlimpiadas()">CAMBIAR TODO</button>
+    </section>
+    <section>
+      <article>
+        <div>
+          <h2>Texto de Referencia</h2>
+          <p>
+            Cuando Fernando Séptimo Usaba paletón Cuando Fernando Séptimo Usaba
+            paletón Cuando Fernando Séptimo Usaba paletó, paletón
+          </p>
+          <button id="btn1">TEXTO REFERENCIA</button>
+        </div>
+
+        <div>
+          <h2>Texto Propio</h2>
+          <textarea name="miTexto" id="miTexto" cols="30" rows="10">
+En una noche estrellada cuando mas brillaba el sol..</textarea
+          >
+          <p></p>
+          <button id="btn2">TEXTO PROPIO</button>
+        </div>
+      </article>
+      <div>
+        <h2>Texto Transformado</h2>
+        <p id="textoCambiado">Elige el caracter de sustitucion</p>
+      </div>
+    </section>
+    <section>
+      <div>
+        <input id="entrada" type="text" value="e" />
+      </div>
+    </section>
+    <script>
+      function olimpiadas() {
+        let str = document.getElementById("uno").innerHTML;
+        let res = str.replace("Munich", "Roma");
+        document.getElementById("dos").innerHTML = res;
+      }
+      function masOlimpiadas() {
+        let str = document.getElementById("uno").innerHTML;
+
+        let res = str.replaceAll("Munich", "Roma");
+        //console.log(aux)
+
+        document.getElementById("dos").innerHTML = res;
+      }
+    </script>
+    <script>
+      let cantaJuegos =
+        "Cuando Fernando Séptimo Usaba paletón Cuando Fernando Séptimo Usaba paletón Cuando Fernando Séptimo Usaba paletó, paletón";
+
+      const mensaje = document.getElementById("textoCambiado");
+      const input = document.getElementById("entrada");
+      const boton1 = document.getElementById("btn1");
+
+      const miTexto = document.getElementById("miTexto");
+      const boton2 = document.getElementById("btn2");
+
+      const vocales = ["a", "e", "i", "o", "u"];
+
+      //letrabuscada = vocales[0];
+
+      boton1.addEventListener("click", function () {
+        let vocalElegida = input.value;
+
+        juegoInfantil(cantaJuegos, vocalElegida);
+      });
+
+      boton2.addEventListener("click", function () {
+        let miFrase = miTexto.value;
+
+        if (miFrase.length == 0 || miFrase.length > 300) {
+          alert(miFrase.length);
+          alert("No se permiten textos vacios o mayores de 300 caracteres");
+        }
+
+        //alert(miFrase);
+        let vocalElegida = input.value;
+
+        juegoInfantil(miFrase, vocalElegida, false);
+      });
+
+      //https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript
+      function removerAcentos(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+
+      //https://es.stackoverflow.com/questions/367098/c%C3%B3mo-puedo-poner-en-may%C3%BAsculas-la-primera-letra-de-cada-palabra-en-una-frase-co
+      // Siempre ha sido una buena solucion pasar de cadena a array (split) y luego de array
+      // a cadena (join) para poder iterar un texto
+      function convertirInicialMayus(cadena) {
+        cadena = cadena.toLowerCase().split(" ");
+
+        for (var i = 0; i < cadena.length; i++) {
+          cadena[i] =
+            cadena[i].charAt(0).toUpperCase() + cadena[i].substring(1);
+        }
+        nombre = cadena.join(" ");
+        return nombre;
+      }
+
+      // 2 - para controlar la ejecucion de una funcion con un rasgo especifico podemos
+      // utilizar un parametro con un valor por defecto que puede cambiar.
+      // luego una 'ternaria' establece la aplicacion correcta de un metodo
+      function juegoInfantil(frase, textoNuevo, c = true) {
+        frase = c == true ? frase.toLowerCase() : frase;
+
+        //LLamo a una funcion externa que me quite tildes
+
+        frase = removerAcentos(frase);
+
+        //
+
+        // let resultado = frase.replace(/t/g, textoNuevo);
+
+        //FOREACH
+        vocales.forEach(function (vocal) {
+          const expresion = new RegExp(vocal, "g"); //Creamos un objeto de expresion regular
+          frase = frase.replace(expresion, textoNuevo);
+        });
+
+        frase = c == true ? convertirInicialMayus(frase) : frase;
+
+        mensaje.innerHTML = frase;
+      }
+    </script>
+  </body>
+</html>
