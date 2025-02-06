@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript - Recoger datos de una API</title>
+
+    <!-- 
+    Hay que mostrar algunos datos de una api-fake, que recibimos en la siguiente ruta
+    https://randomuser.me/api/?results=16
+
+    Utilizaremos como minimo 3 datos
+     - picture.large (ruta de imagen)
+     - name.first (string)
+     - name.last (string)
+            
+    JAVASCRIPT
+    - Conexion con API, con fecht y promesas (.then o async-await)
+
+    - Creacion de nodos en el DOM
+      Dejo el codigo css de la clase card, que se puede aprovechar como querais
+
+
+     -->
+
+    <style>
+      ul {
+        list-style: none;
+        margin-left: 0;
+      }
+
+      .contenedor {
+        width: 80%;
+
+        height: auto;
+        margin: 0 auto;
+        background-color: rgb(146, 164, 164);
+        display: flex;
+        flex-flow: row wrap;
+      }
+
+      .card {
+        width: 23%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        background-color: burlywood;
+        padding: 0.2rem;
+        margin-bottom: 2rem;
+      }
+
+      @media only screen and (max-width: 800px) {
+        .card {
+          width: 48%;
+        }
+
+        body {
+          background-color: rgb(201, 119, 67);
+        }
+      }
+      @media only screen and (max-width: 400px) {
+        body {
+          background-color: rgb(112, 128, 205);
+        }
+        .card {
+          width: 98%;
+        }
+        .card img {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1></h1>
+    <ul id="participantes" class="contenedor"></ul>
+
+    <script>
+     
+    </script>
+  </body>
+</html>
