@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript - Recoger datos de una API</title>
+
+    <!-- 
+    Hay que mostrar algunos datos de una api-fake, que recibimos en la siguiente ruta
+    https://randomuser.me/api/?results=16
+
+    Utilizaremos como minimo 3 datos
+     - picture.large (ruta de imagen)
+     - name.first (string)
+     - name.last (string)
+            
+    JAVASCRIPT
+    - Conexion con API, con fecht y promesas (.then o async-await)
+
+    - Creacion de nodos en el DOM
+      Dejo el codigo css de la clase card, que se puede aprovechar como querais
+
+
+     -->
+
+<style>
+
+    ul {list-style: none;
+        margin-left: 0;}
+
+
+     .contenedor {width: 80%;
+              
+                height: auto;
+                margin: 0 auto;
+                background-color: rgb(146, 164, 164);
+                display: flex;
+                flex-flow: row wrap;}
+
+      .card { width: 23%;
+              height: auto;
+              display: flex;
+              flex-direction:column;
+              background-color: burlywood;
+              padding: 0.2rem;
+              margin-bottom: 2rem;
+      }
+
+     
+
+ 
+
+@media only screen and (max-width: 800px) {
+
+    .card { width: 48%;}
+
+body {
+    background-color: rgb(201, 119, 67);
+  }   
+}
+        @media only screen and (max-width: 400px) {
+
+          body {
+    background-color: rgb(112, 128, 205);
+  } 
+            .card { width: 98%;}
+            .card img {width: 100%;}
+        }
+        
+      
+
+
+</style>
+
+  </head>
+  <body>
+    <h1></h1>
+    <ul id="participantes" class="contenedor"></ul>
+    
+
+    <script>
+  function createNode(element) {
+    return document.createElement(element);
+}
+
+function append(parent, el) {
+  return parent.appendChild(el);
+}
+
+const ul = document.getElementById('participantes');
+const url = 'https://randomuser.me/api/?results=16';
+
+
+
+fetch(url)
+/*  la respuesta que se obtiene no es JSON, sino un objeto con una serie de métodos que pueden 
+usarse dependiendo de lo que se quiera hacer con la información. Para convertir el objeto devuelto en JSON, 
+utilice el método json().
+Añada el método then() que contendrá una función con un parámetro llamado resp (response): 
+El parámetro resp toma el valor del objeto devuelto de fetch(url). 
+Utilice el método json() para convertir resp en datos JSON:*/
+.then((resp) => resp.json()) 
+// .then(function(resp){  resp.json()})
+
+
+/* Aún se deben procesar los datos JSON. Añadir otra instrucción then() con una función 
+que tiene un argumento llamado data:
+Dentro de esta función, creamos una variable llamada elementos que se establece igual a data.results:
+
+Para cada ELEMENTO en ELEMENTOS, le convendrá crear un elemento de lista que muestre una imagen de ellos y muestre su nombre. El método map() funciona muy bien para esto: */
+.then(function(data) {
+  let elementos = data.results;
+
+      pintar(elementos);
+
+
+})
+.catch(function(e) {
+  console.log(e.name+" "+e.type);
+});
+
+
+/*Para cada elemento en elementos, le convendrá crear un elemento de lista que muestre una imagen de ellos y muestre su nombre. El método map() funciona muy bien para esto: */
+//return 
+
+
+function pintar (elementos){   
+return elementos.map(function(elemento) {
+
+let ficha = createNode('li');
+let img = createNode('img');
+let span = createNode('span');
+img.src = elemento.picture.large;
+span.innerHTML = `${elemento.name.first} ${elemento.name.last}`;
+ficha.className="card";
+append(ficha, img);
+append(ficha, span);
+append(ul, ficha);
+})
+
+}
+    </script>
+  </body>
+</html>
+
